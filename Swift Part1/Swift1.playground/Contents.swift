@@ -2,34 +2,36 @@ import UIKit
 
 //MARK: --- Task 1: Palindrome check
 public func isPalindrome(input: String) -> Bool {
+
+    let decomposed = input.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
+
     var cleanedInput = ""
-    
-    for char in input {
+    for char in decomposed {
         if char.isLetter || char.isNumber {
-            cleanedInput.append(char.lowercased())
+            cleanedInput.append(char)
         }
     }
-    
+
     if cleanedInput.count <= 1 {
         return false
     }
-    
+
+    let chars = Array(cleanedInput)
     var left = 0
-    var right = cleanedInput.count - 1
-    let characters = Array(cleanedInput)
-    
+    var right = chars.count - 1
+
     while left < right {
-        if characters[left] != characters[right] {
+        if chars[left] != chars[right] {
             return false
         }
         left += 1
         right -= 1
     }
-    
+
     return true
 }
-
 print(isPalindrome(input: "Ana"))
+print(isPalindrome(input: "Áná"))
 
 //MARK: --- Task 2: BalancedParentheses
 public func isBalancedParentheses(input: String) -> Bool {
