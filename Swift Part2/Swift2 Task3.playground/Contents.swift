@@ -21,7 +21,7 @@ class Person {
     
     //failable init
     init?(name: String, inputAge: Int) {
-        guard inputAge >= 16 else {
+        guard inputAge >= Person.minAgeForEnrollment else {
             return nil
         }
         self.name = name
